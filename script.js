@@ -16,32 +16,29 @@ if (dayjs().isAfter(dayjs().hour(i))) {
         $("#"+ i).next().css("background-color", "#FFA07A")} //lightsalmon
         else {
             $("#"+ i).next().css("background-color", "#98FB98")} //palegreen
-
+;
+//set up the function to fill in hour slot in timeblocks with the hours set using dayjs
 $.each(hoursArray, function(i, val) {
 
     const setHour = dayjs().hour(val);
     var hourText = dayjs(setHour).format("h A");
     $("#"+ val).text(hourText);
     $("#" + val).next().val();
- $("button").click(function (event){
+//set up the click event that store data in local storage 
+    $("button").click(function (event){
     event.preventDefault();    
-//local storage: getItem of the container with free text if any
+//only store items when there is text in the box
     if ($("#" + val).next().val()) {
-   
 //notification of item saved to local storage, key using event hour    
-    localStorage.setItem(hourText, $("#" + val).next().val());
-    // var eventItem = $("#" + val).next().val();
-    // $("#" + val).next().text(eventItem);
-    // localStorage.getItem(hourText);
-   
+    localStorage.setItem(hourText, $("#" + val).next().val());   
     $("#saved").fadeIn(1000);}});
     $("#" + val).next().val(localStorage.getItem(hourText));
     localStorage.getItem(hourText)
-} 
-    
+}
+
 )
     }
-
+//notification floats for a second
     setInterval(function fadeOut(){
     $("#saved").fadeOut()}
     ,1000)
